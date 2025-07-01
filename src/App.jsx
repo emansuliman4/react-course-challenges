@@ -22,7 +22,7 @@ function App() {
   }
 
   const date = new Date();
-  date.setDate(date.getاDate() + count);
+  date.setDate(date.getDate() + count);
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -33,7 +33,7 @@ function App() {
       </div>
 
       <p>
-        n<button onClick={CountPrevious}>-</button>
+        <button onClick={CountPrevious}>-</button>
         <span>count: {count}</span>
         <button onClick={CountNext}>+</button>
       </p>
