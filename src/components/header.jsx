@@ -1,3 +1,4 @@
+import Form from "./form";
 export default function Header() {
   return (
     <div>
@@ -9,27 +10,30 @@ export default function Header() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "Monoton",
+          fontFamily: "cursive",
           padding: "0",
           margin: "0",
         }}
       >
         ✒️ TO DO LIST 📝
       </h1>
-      <h3
+      <div
         style={{
-          minHeight: "50px",
+          minHeight: "70px",
           width: "100%",
           backgroundColor: "#5FA8D3",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
           padding: "0",
           margin: "0",
+          fontFamily: "Monoton",
         }}
       >
-        What do you need for your new🤩 day?
-      </h3>
+        <h3 style={{ margin: "0 10px " }}>
+          What do you need for your new🤩 day?
+        </h3>
+        <Form />
+      </div>
     </div>
   );
 }
