@@ -8,7 +8,6 @@ export function List({ tasks }) {
         backgroundColor: "#62B6CB",
         display: "flex",
         flex: "1",
-        justifyContent: "center",
         padding: "10px",
         margin: "0",
         boxSizing: "border-box",
