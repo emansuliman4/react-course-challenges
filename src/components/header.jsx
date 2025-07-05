@@ -1,5 +1,8 @@
-import Form from "./form";
-export default function Header() {
+import { List } from "./list";
+import { Form, TaskList } from "./form";
+import { useState } from "react";
+export function Header() {
+  const [tasks, setTasks] = useState([]);
   return (
     <div>
       <h1
@@ -32,8 +35,9 @@ export default function Header() {
         <h3 style={{ margin: "0 10px " }}>
           What do you need for your new🤩 day?
         </h3>
-        <Form />
+        <Form tasks={tasks} setTasks={setTasks} />
       </div>
+      <List tasks={tasks} />
     </div>
   );
 }

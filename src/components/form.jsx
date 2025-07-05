@@ -1,12 +1,19 @@
 import { useState } from "react";
-export default function Form() {
+export function Form({ tasks, setTasks }) {
   const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [hour, setHour] = useState(1);
+
   function handleSubmit(e) {
     e.preventDefault();
     if (task.trim() === "") return;
-    setTasks([...tasks, task]);
+    const newTask = {
+      text: task,
+      hour: hour,
+      id: Date.now(),
+    };
+    setTasks([...tasks, newTask]);
     setTask("");
+    setHour(1);
   }
   return (
     <div>
@@ -36,6 +43,8 @@ export default function Form() {
             borderRadius: "20%",
             background: "#CAE9FF",
           }}
+          value={hour}
+          onChange={(e) => setHour(e.target.value)}
         >
           {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
             <option value={num} key={num}>
@@ -56,5 +65,16 @@ export default function Form() {
         </button>
       </form>
     </div>
+  );
+}
+export function TaskList({ tasks }) {
+  return (
+    <ul>
+      {tasks.map((t) => (
+        <li key={t.id}>
+          {t.text} - {t.hour} hour(s)
+        </li>
+      ))}
+    </ul>
   );
 }
