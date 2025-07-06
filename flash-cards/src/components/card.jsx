@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export const questions = [
   {
     question:
@@ -53,10 +55,35 @@ export const questions = [
 ];
 
 export function Card({ question, answer }) {
+  const [flipped, setFlipped] = useState();
+
+  const handleFlip = () => {
+    setFlipped(!flipped);
+  };
   return (
     <div>
-      <h3>{question}</h3>
-      <p>{answer}</p>
+      <div
+        onClick={handleFlip}
+        style={{
+          width: "300px",
+          height: "200px",
+          margin: "10px auto",
+          padding: "20px",
+          backgroundColor: "#f0f0f0",
+          borderRadius: "12px",
+          boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          cursor: "pointer",
+          fontSize: "18px",
+          textAlign: "center",
+          transition: "transform 0.5s",
+          transform: flipped ? "rotateY(360deg)" : "rotateY(0deg)",
+        }}
+      >
+        {flipped ? answer : question}
+      </div>
     </div>
   );
 }
