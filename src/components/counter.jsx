@@ -12,7 +12,10 @@ export function Counter({ count, setCount, step }) {
             setCount((c) => c - step);
           }}
         />
-        <p style={{ margin: "2px" }}>Count:{count}</p>
+        <input
+          value={count}
+          onChange={(e) => setCount(Number(e.target.value))}
+        />
         <Button
           label={"+"}
           onClick={() => {
