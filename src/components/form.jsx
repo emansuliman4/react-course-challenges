@@ -16,6 +16,7 @@ export function Form({ onAdd }) {
       completed: false,
       id: Date.now(),
     };
+
     onAdd(newItem);
     setHour(1);
     setTask("");
