@@ -1,19 +1,14 @@
-import { TaskList, Form } from "./form.jsx";
-export function List({ tasks }) {
+export function List({ list }) {
   return (
-    <div
-      style={{
-        width: "100%",
-        minHeight: "calc(100vh - 60px)",
-        backgroundColor: "#62B6CB",
-        display: "flex",
-        flex: "1",
-        padding: "10px",
-        margin: "0",
-        boxSizing: "border-box",
-      }}
-    >
-      <TaskList tasks={tasks} />
+    <div className="list">
+      <ul>
+        {list.map((item) => (
+          <li key={item.id}>
+            {item.quantity} hr{" => "}
+            {item.description}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

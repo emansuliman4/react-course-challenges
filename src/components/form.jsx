@@ -1,80 +1,49 @@
 import { useState } from "react";
-export function Form({ tasks, setTasks }) {
-  const [task, setTask] = useState("");
+import "../styles/body.css";
+
+export function Form({ onAdd }) {
+  // Add onAdd prop
   const [hour, setHour] = useState(1);
+  const [task, setTask] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (task.trim() === "") return;
-    const newTask = {
-      text: task,
-      hour: hour,
+    if (!task) return;
+
+    const newItem = {
+      quantity: hour,
+      description: task,
+      completed: false,
       id: Date.now(),
     };
-    setTasks([...tasks, newTask]);
-    setTask("");
+    onAdd(newItem);
     setHour(1);
+    setTask("");
   }
+
   return (
-    <div>
-      <form
-        style={{
-          display: "flex",
-          height: "30px",
-        }}
-        onSubmit={handleSubmit}
-      >
-        <input
-          style={{
-            border: "1px solid black",
-            borderRadius: "20%",
-            minHeight: "30px",
-            background: "#CAE9FF",
-          }}
-          placeholder="Type your task..."
-          type="text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-        />
+    <div className="form">
+      <span>What is your future plan🤩? </span>
+      <form onSubmit={handleSubmit}>
         <select
-          style={{
-            margin: "0 20px",
-            border: "1px solid black",
-            borderRadius: "20%",
-            background: "#CAE9FF",
-          }}
+          style={{ textAlign: "center" }}
           value={hour}
-          onChange={(e) => setHour(e.target.value)}
+          onChange={(e) => setHour(Number(e.target.value))}
         >
           {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
-            <option value={num} key={num}>
+            <option key={num} value={num}>
               {num}
             </option>
           ))}
         </select>
-        <button
-          type="submit"
-          style={{
-            border: "1px solid black",
-            borderRadius: "20%",
-            minWidth: "60px",
-            background: "#CAE9FF",
-          }}
-        >
-          Add
-        </button>
+        <input
+          type="text"
+          placeholder="Type your new task..."
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+        />
+        <button type="submit">Add</button>
       </form>
     </div>
-  );
-}
-export function TaskList({ tasks }) {
-  return (
-    <ul>
-      {tasks.map((t) => (
-        <li key={t.id}>
-          {t.text} - {t.hour} hour(s)
-        </li>
-      ))}
-    </ul>
   );
 }
