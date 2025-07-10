@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  justify-content: center;
+  min-height: 15vh;
+  background-color: #8d99ae;
+}
+span,
+form {
+  display: flex;
+  align-items: center;
+}
+select {
+  margin: 0px 20px;
+}
+button {
+  margin-left: 5vi;
+  background-color: #669bbc;
+  min-height: 6vh;
+  min-width: 9vw;
+  border-radius: 20%;
+}
+select {
+  min-height: 6vh;
+  min-width: 6vw;
+  border-radius: 50%;
+  background-color: #f8f9fa;
+}
+input {
+  min-height: 6vh;
+  min-width: 40vw;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+}
+
+.list {
+  background-color: #003049;
+  color: #f8f9fa;
+  display: flex;
+  flex: 1;
+}

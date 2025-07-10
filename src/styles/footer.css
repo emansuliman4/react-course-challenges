@@ -1,0 +1,13 @@
+.footer {
+  background-color: #669bbc;
+  min-height: 12vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+h3 {
+  display: flex;
+  align-items: center;
+}
