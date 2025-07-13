@@ -7,12 +7,12 @@ export function List({ list, onRemove, onToggle }) {
             <input
               type="checkbox"
               className="checkbox"
-              checked={item.complated}
+              checked={item.completed}
               onChange={() => onToggle(item.id)}
             />
             <span
               style={{
-                textDecoration: item.complated ? "line-through" : "none",
+                textDecoration: item.completed ? "line-through" : "none",
               }}
             >
               {"("}

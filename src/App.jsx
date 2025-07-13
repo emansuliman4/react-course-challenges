@@ -12,7 +12,7 @@ function App() {
   function handleToggle(id) {
     setList((list) =>
       list.map((item) =>
-        item.id === id ? { ...item, complated: !item.complated } : item
+        item.id === id ? { ...item, completed: !item.completed } : item
       )
     );
   }
@@ -23,7 +23,7 @@ function App() {
       <Header />
       <Form onAdd={(item) => setList((list) => [...list, item])} />
       <List list={list} onRemove={handleRemove} onToggle={handleToggle} />
-      <Footer />
+      <Footer list={list} />
     </div>
   );
 }
