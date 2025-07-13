@@ -7,7 +7,14 @@ import { useState } from "react";
 function App() {
   const [list, setList] = useState([]);
   function handleRemove(id) {
-    setList((prevList) => prevList.filter((item) => item.id !== id));
+    setList((list) => list.filter((item) => item.id !== id));
+  }
+  function handleToggle(id) {
+    setList((list) =>
+      list.map((item) =>
+        item.id === id ? { ...item, complated: !item.complated } : item
+      )
+    );
   }
   return (
     <div
@@ -15,7 +22,7 @@ function App() {
     >
       <Header />
       <Form onAdd={(item) => setList((list) => [...list, item])} />
-      <List list={list} onRemove={handleRemove} />
+      <List list={list} onRemove={handleRemove} onToggle={handleToggle} />
       <Footer />
     </div>
   );

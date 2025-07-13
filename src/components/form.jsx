@@ -24,12 +24,13 @@ export function Form({ onAdd }) {
 
   return (
     <div className="form">
-      <span>What is your future plan🤩? </span>
-      <form onSubmit={handleSubmit}>
+      <span className="span">What is your future plan🤩? </span>
+      <form onSubmit={handleSubmit} className="form">
         <select
           style={{ textAlign: "center" }}
           value={hour}
           onChange={(e) => setHour(Number(e.target.value))}
+          className="select"
         >
           {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
             <option key={num} value={num}>
@@ -42,8 +43,11 @@ export function Form({ onAdd }) {
           placeholder="Type your new task..."
           value={task}
           onChange={(e) => setTask(e.target.value)}
+          className="input"
         />
-        <button type="submit">Add</button>
+        <button type="submit" className="btn">
+          Add
+        </button>
       </form>
     </div>
   );
