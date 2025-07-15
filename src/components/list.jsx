@@ -1,5 +1,5 @@
 export function List({ list, onRemove, onToggle, onClear, sortBy, setSortBy }) {
-  let sortedItems = list;
+  let sortedItems = "";
 
   if (sortBy === "input") {
     sortedItems = list;

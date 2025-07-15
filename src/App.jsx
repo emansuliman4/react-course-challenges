@@ -19,7 +19,11 @@ function App() {
     );
   }
   function onClear() {
-    setList([]);
+    let confirm = window.confirm("Are you sure you want to delete all items?");
+
+    if (confirm) {
+      setList([]);
+    }
   }
   return (
     <div
