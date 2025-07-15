@@ -6,6 +6,8 @@ import { useState } from "react";
 
 function App() {
   const [list, setList] = useState([]);
+  const [sortBy, setSortBy] = useState("");
+
   function handleRemove(id) {
     setList((list) => list.filter((item) => item.id !== id));
   }
@@ -16,13 +18,28 @@ function App() {
       )
     );
   }
+  function onClear() {
+    setList([]);
+  }
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        flex: "1",
+      }}
     >
       <Header />
       <Form onAdd={(item) => setList((list) => [...list, item])} />
-      <List list={list} onRemove={handleRemove} onToggle={handleToggle} />
+      <List
+        list={list}
+        onRemove={handleRemove}
+        onToggle={handleToggle}
+        onClear={onClear}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+      />
       <Footer list={list} />
     </div>
   );

@@ -27,7 +27,6 @@ export function Form({ onAdd }) {
       <span className="span">What is your future plan🤩? </span>
       <form onSubmit={handleSubmit} className="form">
         <select
-          style={{ textAlign: "center" }}
           value={hour}
           onChange={(e) => setHour(Number(e.target.value))}
           className="select"
