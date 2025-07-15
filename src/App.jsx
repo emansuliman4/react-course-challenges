@@ -1,52 +1,5 @@
-import { Header } from "./components/header";
-import { Footer } from "./components/footer";
-import { Form } from "./components/form";
-import { List } from "./components/list";
-import { useState } from "react";
-
 function App() {
-  const [list, setList] = useState([]);
-  const [sortBy, setSortBy] = useState("");
-
-  function handleRemove(id) {
-    setList((list) => list.filter((item) => item.id !== id));
-  }
-  function handleToggle(id) {
-    setList((list) =>
-      list.map((item) =>
-        item.id === id ? { ...item, completed: !item.completed } : item
-      )
-    );
-  }
-  function onClear() {
-    let confirm = window.confirm("Are you sure you want to delete all items?");
-
-    if (confirm) {
-      setList([]);
-    }
-  }
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
-        flex: "1",
-      }}
-    >
-      <Header />
-      <Form onAdd={(item) => setList((list) => [...list, item])} />
-      <List
-        list={list}
-        onRemove={handleRemove}
-        onToggle={handleToggle}
-        onClear={onClear}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-      />
-      <Footer list={list} />
-    </div>
-  );
+  return <div></div>;
 }
 
 export default App;
