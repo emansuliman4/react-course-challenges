@@ -1,5 +1,10 @@
+import { Accordion } from "./components/qa";
 function App() {
-  return <div></div>;
+  return (
+    <div>
+      <Accordion />
+    </div>
+  );
 }
 
 export default App;
