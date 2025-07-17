@@ -19,15 +19,7 @@ export function Accordion() {
         >
           <span className="number">{idx + 1}</span>
           <h1 className="title">{faq.title}</h1>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleToggle(idx);
-            }}
-            className="icon"
-          >
-            {openIndex === idx ? "-" : "+"}
-          </button>
+          <button className="icon">{openIndex === idx ? "-" : "+"}</button>
           {openIndex === idx && (
             <div className="content-box">
               <p>{faq.text}</p>
