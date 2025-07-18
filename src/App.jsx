@@ -1,5 +1,10 @@
+import { Tip } from "./components/tip";
 function App() {
-  return <></>;
+  return (
+    <>
+      <Tip />
+    </>
+  );
 }
 
 export default App;
