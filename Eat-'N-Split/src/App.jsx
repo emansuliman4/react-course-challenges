@@ -1,7 +1,11 @@
 import "./App.css";
-
+import { FullCycle } from "./components/form";
 function App() {
-  return <></>;
+  return (
+    <div>
+      <FullCycle />
+    </div>
+  );
 }
 
 export default App;
