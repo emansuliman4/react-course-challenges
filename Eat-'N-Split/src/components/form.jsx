@@ -45,17 +45,22 @@ export function Input({ children, type, ...rest }) {
 // exported Functions
 export function FullCycle() {
   const [addFriend, setAddFriend] = useState(false);
+  const [friends, setFriends] = useState(initialFriends);
+
   function handelAddFriend() {
     setAddFriend((openForm) => !openForm);
+  }
+  function handleAddNewFriend(friend) {
+    setFriends([...friends, friend]);
   }
   return (
     <div className="App">
       <div className="mainPage">
-        <Friends />
+        <Friends friends={friends} />
         <SplitBill />
       </div>
       <div className="billContainer">
-        {addFriend && <AddFriend />}
+        {addFriend && <AddFriend onAddFriend={handleAddNewFriend} />}
 
         <Btn style={{ marginLeft: "115px" }} onClick={handelAddFriend}>
           {addFriend ? "Close" : "Add friend"}
@@ -65,39 +70,71 @@ export function FullCycle() {
   );
 }
 
-export function Friends() {
+export function Friends({ friends }) {
   return (
     <div className="friends">
       <ul>
-        <Friend friends={initialFriends} />
+        <Friend friends={friends} />
       </ul>
     </div>
   );
 }
 
-export function AddFriend() {
+export function AddFriend({ onAddFriend }) {
+  const [friendName, setFriendName] = useState("");
+  const [imgURL, setImageURL] = useState("https://i.pravatar.cc/48/2");
+  function handelForm(e) {
+    e.preventDefault();
+    const newFriend = {
+      name: friendName,
+      img: imgURL,
+      balance: 0,
+      id: crypto.randomUUID(),
+    };
+    onAddFriend(newFriend);
+    setFriendName("");
+    setImageURL("https://i.pravatar.cc/48/2");
+  }
+  function handelFriendInput(e) {
+    setFriendName(e.target.value);
+  }
+  function handelImgURLInput(e) {
+    setImageURL(e.target.value);
+  }
   return (
     <div className="addFriendContainer">
       <div className="addFriend">
-        <Input type="text"> Friend Name</Input>
-        <Input type="text"> Image URL</Input>
-        <Btn className="btnAdd">Add</Btn>
+        <form onSubmit={handelForm}>
+          <Input type="text" value={friendName} onChange={handelFriendInput}>
+            Friend Name
+          </Input>
+          <Input type="text" value={imgURL} onChange={handelImgURLInput}>
+            Image URL
+          </Input>
+        </form>
+
+        <Btn className="btnAdd" onClick={handelForm}>
+          Add
+        </Btn>
       </div>
     </div>
   );
 }
 
 export function SplitBill() {
+  function handelForm(e) {
+    e.preventDefault();
+  }
   return (
     <div className="billContainer">
-      <div className="splitBill">
+      <form className="splitBill" onSubmit={handelForm}>
         <Input type="number"> Bill Value</Input>
         <Input type="number"> Your expensee</Input>
         <Input type="number" disabled>
           x's expensee
         </Input>
         <Btn>Spilt Bill</Btn>
-      </div>
+      </form>
     </div>
   );
 }
