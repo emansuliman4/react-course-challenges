@@ -46,35 +46,41 @@ export function Input({ children, type, ...rest }) {
 export function FullCycle() {
   const [addFriend, setAddFriend] = useState(false);
   const [friends, setFriends] = useState(initialFriends);
+  const [friendBill, setFriendBill] = useState(null);
 
-  function handelAddFriend() {
+  function handleAddFriend() {
     setAddFriend((openForm) => !openForm);
   }
   function handleAddNewFriend(friend) {
     setFriends([...friends, friend]);
+    setAddFriend(false);
+  }
+
+  function handleBill(friend) {
+    setFriendBill(friend);
   }
   return (
     <div className="App">
       <div className="mainPage">
-        <Friends friends={friends} />
-        <SplitBill />
+        <Friends friends={friends} handleBill={handleBill} />
+        <SplitBill friend={friendBill} />
       </div>
       <div className="billContainer">
         {addFriend && <AddFriend onAddFriend={handleAddNewFriend} />}
-
-        <Btn style={{ marginLeft: "115px" }} onClick={handelAddFriend}>
+        <Btn style={{ marginLeft: "115px" }} onClick={handleAddFriend}>
           {addFriend ? "Close" : "Add friend"}
         </Btn>
+        ِ
       </div>
     </div>
   );
 }
 
-export function Friends({ friends }) {
+export function Friends({ friends, handleBill }) {
   return (
     <div className="friends">
       <ul>
-        <Friend friends={friends} />
+        <Friend friends={friends} handleBill={handleBill} />
       </ul>
     </div>
   );
@@ -83,7 +89,7 @@ export function Friends({ friends }) {
 export function AddFriend({ onAddFriend }) {
   const [friendName, setFriendName] = useState("");
   const [imgURL, setImageURL] = useState("https://i.pravatar.cc/48/2");
-  function handelForm(e) {
+  function handleForm(e) {
     e.preventDefault();
     const newFriend = {
       name: friendName,
@@ -95,25 +101,25 @@ export function AddFriend({ onAddFriend }) {
     setFriendName("");
     setImageURL("https://i.pravatar.cc/48/2");
   }
-  function handelFriendInput(e) {
+  function handleFriendInput(e) {
     setFriendName(e.target.value);
   }
-  function handelImgURLInput(e) {
+  function handleImgURLInput(e) {
     setImageURL(e.target.value);
   }
   return (
     <div className="addFriendContainer">
       <div className="addFriend">
-        <form onSubmit={handelForm}>
-          <Input type="text" value={friendName} onChange={handelFriendInput}>
+        <form onSubmit={handleForm}>
+          <Input type="text" value={friendName} onChange={handleFriendInput}>
             Friend Name
           </Input>
-          <Input type="text" value={imgURL} onChange={handelImgURLInput}>
+          <Input type="text" value={imgURL} onChange={handleImgURLInput}>
             Image URL
           </Input>
         </form>
 
-        <Btn className="btnAdd" onClick={handelForm}>
+        <Btn type="submit" className="btnAdd" onClick={handleForm}>
           Add
         </Btn>
       </div>
@@ -121,26 +127,37 @@ export function AddFriend({ onAddFriend }) {
   );
 }
 
-export function SplitBill() {
-  function handelForm(e) {
+export function SplitBill({ friend }) {
+  function handleForm(e) {
     e.preventDefault();
   }
   return (
     <div className="billContainer">
-      <form className="splitBill" onSubmit={handelForm}>
-        <Input type="number"> Bill Value</Input>
-        <Input type="number"> Your expensee</Input>
-        <Input type="number" disabled>
-          x's expensee
-        </Input>
-        <Btn>Spilt Bill</Btn>
-      </form>
+      {friend && (
+        <form className="splitBill" onSubmit={handleForm}>
+          <h2>SPLIT A BILL WITH {friend.name}</h2>
+          <Input type="number"> Bill Value</Input>
+          <Input type="number"> Your expensee</Input>
+          <Input type="number" disabled>
+            {friend.name}'s expensee
+          </Input>
+          <div className="input ">
+            <label style={{ width: "10vw" }}>who is paying the bill</label>
+            <select className="select">
+              <option value="">You</option>
+              <option value="">{friend.name}</option>
+            </select>
+          </div>
+
+          <Btn>Spilt Bill</Btn>
+        </form>
+      )}
     </div>
   );
 }
 
 // logic functions
-function Friend({ friends }) {
+function Friend({ friends, handleBill }) {
   return (
     <div>
       {friends.map((friend) => (
@@ -149,17 +166,19 @@ function Friend({ friends }) {
           <div>
             <h3 className="name">{friend.name}</h3>
             {friend.balance == 0 ? (
-              <p className="balance">you and eman are even</p>
+              <p className="balance">you and {friend.name} are even</p>
             ) : friend.balance > 0 ? (
-              <p style={{ color: "green" }}>eman owes you {friend.balance}</p>
+              <p style={{ color: "green" }}>
+                {friend.name} owes you {friend.balance}
+              </p>
             ) : (
               <p style={{ color: "red" }}>
-                you owe eman {Math.abs(friend.balance)}
+                you owe {friend.name} {Math.abs(friend.balance)}
               </p>
             )}
           </div>
 
-          <Btn>Select</Btn>
+          <Btn onClick={() => handleBill(friend)}>Select</Btn>
         </li>
       ))}
     </div>

@@ -34,7 +34,7 @@ li {
 }
 
 button {
-  border: 1px solid saddlebrown;
+  border: none;
   background-color: orange;
   border-radius: 10px;
   height: 5vh;
@@ -67,12 +67,17 @@ button {
   width: 80%;
   max-height: 0vh;
 }
-Input {
+Input,
+.select {
   background-color: rgba(254, 254, 254, 0.846);
   border: none;
   border-radius: 5px;
   height: 4vh;
   text-align: center;
+}
+
+select {
+  width: 177px;
 }
 
 /* splitBill */
